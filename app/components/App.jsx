@@ -1,29 +1,27 @@
 import React from 'react';
-import { createStore } from 'redux';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
-
-import Login from './Login';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import Navigation from './Navigation';
+import Home from './Home';
 import Protected from './Protected';
 import Edit from './Edit';
 
-const App = ({ name }) => (
+const App = () => (
   <BrowserRouter>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/todo">ToDo</Link>
-        </li>
-      </ul>
+    <Provider store={store}>
       <div>
-        <Route exact path="/" component={Login} />
-        <Route path="/protected/todo" component={Protected} />
-        <Route path="/protected/edit" component={Edit} />
-        <Route path="/protected/create" component={Edit} />
+        <Navigation />
+        <div>
+          <div className="container">
+            <Route exact path="/" component={Home} />
+            <Route path="/protected/todo" component={Protected} />
+            <Route path="/protected/edit" component={Edit} />
+            <Route path="/protected/create" component={Edit} />
+          </div>
+        </div>
       </div>
-    </div>
+    </Provider>
   </BrowserRouter>
 );
 
