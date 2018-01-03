@@ -1,9 +1,5 @@
-import React from "react";
+import React from 'react';
+import { render } from 'react-dom';
+import App from './components/App';
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-  }
-}
-
-let a = 5;
+render(<App name="Anuar"/>, document.getElementById('app'));
