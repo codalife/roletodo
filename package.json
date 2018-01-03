@@ -5,12 +5,15 @@
   "author": "Anuar Zhuken",
   "license": "MIT",
   "scripts": {
-    "format":
-      "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"**/*.{js,jsx}\""
+    "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"**/*.{js,jsx}\""
   },
   "dependencies": {
     "react": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb-base": "^12.1.0"
   }
 }
