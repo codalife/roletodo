@@ -1,17 +1,27 @@
 import axios from 'axios';
-import { FETCH_USER } from './actions';
+import { FETCH_USER, SET_QUERY } from './actions';
 
-const domain = 'localhost:3000';
+// const ajaxCall = name => {
+//   return axios({
+//     url: `/user/${name}`,
+//     method: 'GET',
+//     esponseType: 'json',
+//   }).then(response => {
+//     return response;
+//   });
+// };
 
-const fetchUser = name => {
-  const user = axios({
-    url: `${domain}/user/${name}`,
+export const fetchUser = (dispatch, name) => {
+  return axios({
+    url: `/user/${name}`,
     method: 'GET',
     esponseType: 'json',
-  }).then(response => response);
-
-  return {
-    type: FETCH_USER,
-    payload: user,
-  };
+  }).then(response => {
+    dispatch({ type: FETCH_USER, payload: response.data });
+  });
 };
+
+export const setUserQuery = name => ({
+  type: SET_QUERY,
+  payload: name,
+});
