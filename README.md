@@ -21,3 +21,4 @@ Redux - not really justifiable for an app this size
 Behind the scenes
 
 1. Prettier on save
+2. ESLINT

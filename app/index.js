@@ -5,3 +5,5 @@ export default class App extends React.Component {
     super();
   }
 }
+
+let a = 5;
