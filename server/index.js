@@ -3,25 +3,6 @@ const db = require('./db');
 const app = express();
 const Sequelize = require('sequelize');
 
-const hardCoded = {
-  Anuar: {
-    role: 'employee',
-    tasks: [
-      { name: 'Do good', completed: false },
-      { name: 'Get a job', completed: false },
-      { name: 'Make everyone happy', completed: true },
-    ],
-  },
-  Rane: {
-    role: 'manager',
-    tasks: [
-      { name: 'Hire Anuar', completed: false },
-      { name: 'Get a job', completed: false },
-      { name: 'Make everyone happy', completed: false },
-    ],
-  },
-};
-
 app.use(express.static('dist'));
 
 app.get('/users', (req, res) =>
@@ -37,6 +18,27 @@ app.get('/users', (req, res) =>
     .catch(err => console.log(err)),
 );
 
-app.get('/user/:name', (req, res) => res.send(hardCoded[req.params.name]));
+app.get('/user/:name', (req, res) =>
+  db.user
+    .findOne({
+      where: { name: req.params.name },
+    })
+    .then(user => {
+      if (!user) {
+        res.send(`User ${req.params.name} not found`);
+      } else if (user.role === 'manager') {
+        db.task
+          .findAll({ include: [{ model: db.user }] })
+          .then(tasks => res.send({ user: user, tasks: tasks }));
+      } else if (user.role === 'employee') {
+        db.task.findAll({ where: { userId: user.id } }).then(tasks =>
+          res.send({
+            user: user,
+            tasks: tasks,
+          }),
+        );
+      }
+    }),
+);
 
 app.listen(3000, () => console.log('app listening on port 3000'));
