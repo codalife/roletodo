@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Login from './Login';
 import ToDoList from './ToDoList';
 
-const user = false;
+const Home = props => (props.role ? <ToDoList /> : <Login />);
 
-const Home = () => (user ? <ToDoList /> : <Login />);
+const mapStateToProps = state => ({ role: state.role });
 
-export default Home;
+export default connect(mapStateToProps)(Home);
