@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { signout } from '../redux/actionCreators';
 
 const Navigation = props => (
   <Navbar inverse collapseOnSelect>
@@ -13,9 +14,7 @@ const Navigation = props => (
     <Navbar.Collapse>
       {props.role ? (
         <Nav pullRight>
-          <NavItem eventKey={2} href="#">
-            Signout
-          </NavItem>
+          <NavItem onClick={props.signout}>signout</NavItem>
         </Nav>
       ) : (
         <Nav />
@@ -28,4 +27,10 @@ const mapStateToProps = state => ({
   role: state.role,
 });
 
-export default connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = dispatch => ({
+  signout() {
+    dispatch(signout());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

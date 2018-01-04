@@ -1,4 +1,4 @@
-import { FETCH_USER, SET_QUERY, FILTER } from '../redux/actions';
+import { FETCH_USER, SET_QUERY, FILTER, SIGNOUT } from '../redux/actions';
 const INIT_STATE = {
   role: null,
   userQuery: null,
@@ -29,6 +29,8 @@ const reducer = (state = INIT_STATE, action) => {
           break;
       }
       return { ...state, active: action.payload, todosToShow };
+    case SIGNOUT:
+      return { ...INIT_STATE };
     default:
       return state;
   }

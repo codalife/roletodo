@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 import Navigation from './Navigation';
 import Home from './Home';
-import Protected from './Protected';
 import Edit from './Edit';
 
 const App = () => (
@@ -15,7 +14,6 @@ const App = () => (
         <div>
           <div className="container">
             <Route exact path="/" component={Home} />
-            <Route path="/protected/todo" component={Protected} />
             <Route path="/protected/edit" component={Edit} />
             <Route path="/protected/create" component={Edit} />
           </div>
