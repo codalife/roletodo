@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./db');
 const app = express();
+const Sequelize = require('sequelize');
 
 const hardCoded = {
   Anuar: {
@@ -25,7 +26,13 @@ app.use(express.static('dist'));
 
 app.get('/users', (req, res) =>
   db.user
-    .findAll()
+    .findAll({
+      include: [
+        {
+          model: db.task,
+        },
+      ],
+    })
     .then(users => res.send(users))
     .catch(err => console.log(err)),
 );

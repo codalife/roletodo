@@ -1,17 +1,23 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./sequelize');
+const User = require('./User');
 
-const User = sequelize.define('user', {
+const Task = sequelize.define('task', {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,
   },
-  name: {
+  title: {
     type: Sequelize.STRING,
   },
-  role: {
+  description: {
     type: Sequelize.STRING,
+  },
+  userId: {
+    type: Sequelize.INTEGER,
   },
 });
+User.hasMany(Task);
+Task.belongsTo(User);
 
-module.exports = User;
+module.exports = Task;
