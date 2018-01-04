@@ -1,7 +1,8 @@
 import React from 'react';
 import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const Navigation = () => (
+const Navigation = props => (
   <Navbar inverse collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
@@ -10,13 +11,21 @@ const Navigation = () => (
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
-      <Nav pullRight>
-        <NavItem eventKey={2} href="#">
-          Signout
-        </NavItem>
-      </Nav>
+      {props.role ? (
+        <Nav pullRight>
+          <NavItem eventKey={2} href="#">
+            Signout
+          </NavItem>
+        </Nav>
+      ) : (
+        <Nav />
+      )}
     </Navbar.Collapse>
   </Navbar>
 );
 
-export default Navigation;
+const mapStateToProps = state => ({
+  role: state.role,
+});
+
+export default connect(mapStateToProps)(Navigation);

@@ -15,6 +15,14 @@ const hardCoded = {
       { name: 'Make everyone happy', completed: false },
     ],
   },
+  Rane: {
+    role: 'manager',
+    tasks: [
+      { name: 'Hire Anuar', completed: false },
+      { name: 'Get a job', completed: false },
+      { name: 'Make everyone happy', completed: false },
+    ],
+  },
 };
 
 app.use(express.static('dist'));

@@ -1,20 +1,40 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-
-import Edit from './Edit';
+import { connect } from 'react-redux';
+import { Panel, Media, Checkbox, Button } from 'react-bootstrap';
 
 const ToDoList = props => (
   <div>
-    <div>To Do</div>
-    {console.log(props)}
-    {props.user === 'manager' ? (
-      <div>
-        <Link to="/protected/edit">Edit</Link>
-      </div>
-    ) : (
-      <div>Tick Box </div>
-    )}
+    <div>
+      {props.tasks.map((task, index) => (
+        <Panel header={task.name} key={index}>
+          <Media key={index}>
+            <Media.Left>
+              <Checkbox disabled={props.role === 'manager'} />
+            </Media.Left>
+            <Media.Body>
+              <p>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+                scelerisque ante sollicitudin commodo. Cras purus odio,
+                vestibulum in vulputate at, tempus viverra turpis. Fusce
+                condimentum nunc ac nisi vulputate fringilla. Donec lacinia
+                congue felis in faucibus.
+              </p>
+            </Media.Body>
+            {props.role === 'manager' ? (
+              <Media.Right>
+                <Button>Edit</Button>
+              </Media.Right>
+            ) : (
+              <Media.Right />
+            )}
+          </Media>
+        </Panel>
+      ))}
+    </div>
   </div>
 );
 
-export default ToDoList;
+const mapStateToProps = state => ({ role: state.role, tasks: state.tasks });
+
+export default connect(mapStateToProps)(ToDoList);

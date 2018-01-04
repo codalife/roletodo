@@ -1,16 +1,6 @@
 import axios from 'axios';
 import { FETCH_USER, SET_QUERY } from './actions';
 
-// const ajaxCall = name => {
-//   return axios({
-//     url: `/user/${name}`,
-//     method: 'GET',
-//     esponseType: 'json',
-//   }).then(response => {
-//     return response;
-//   });
-// };
-
 export const fetchUser = (dispatch, name) => {
   return axios({
     url: `/user/${name}`,

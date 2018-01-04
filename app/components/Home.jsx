@@ -6,6 +6,8 @@ import ToDoList from './ToDoList';
 
 const Home = props => (props.role ? <ToDoList /> : <Login />);
 
-const mapStateToProps = state => ({ role: state.role });
+const mapStateToProps = state => ({
+  role: state.role,
+});
 
 export default connect(mapStateToProps)(Home);
