@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Panel, Media, Checkbox, Button } from 'react-bootstrap';
+import { changeStatusAction } from '../redux/actionCreators';
 
 import TabSwitcher from './TabSwitcher';
 
@@ -11,7 +12,9 @@ const ToDoList = props => (
       <TabSwitcher />
     ) : (
       <Panel>
-        <Button> Create to do </Button>
+        <Link to="/create">
+          <Button> Create to do </Button>
+        </Link>
       </Panel>
     )}
     <div>
@@ -19,7 +22,10 @@ const ToDoList = props => (
         <Panel header={task.name} key={index}>
           <Media key={index}>
             <Media.Left>
-              <Checkbox disabled={props.role === 'manager'} />
+              <Checkbox
+                onClick={() => props.changeStatus(task.id)}
+                disabled={props.role === 'manager'}
+              />
             </Media.Left>
             <Media.Body>
               <p>
@@ -32,7 +38,9 @@ const ToDoList = props => (
             </Media.Body>
             {props.role === 'manager' ? (
               <Media.Right>
-                <Button>Edit</Button>
+                <Link to={`/edit/${index}`}>
+                  <Button>Edit</Button>
+                </Link>
               </Media.Right>
             ) : (
               <Media.Right />
@@ -47,6 +55,12 @@ const ToDoList = props => (
 const mapStateToProps = state => ({
   role: state.role,
   todosToShow: state.todosToShow,
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeStatus(taskId) {
+    dispatch();
+  },
 });
 
 export default connect(mapStateToProps)(ToDoList);

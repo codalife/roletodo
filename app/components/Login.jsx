@@ -23,15 +23,15 @@ class Login extends React.Component {
         <h2>Login</h2>
         <Form onSubmit={this.handleSubmit.bind(this)}>
           <FormGroup controlId="formInlineName">
-            <ControlLabel>Name</ControlLabel>{' '}
             <FormControl
               onChange={this.handleChange.bind(this)}
               type="text"
               placeholder="Jane Doe"
             />
-          </FormGroup>{' '}
+          </FormGroup>
           <Button type="submit">login</Button>
         </Form>
+        <span>{this.props.message}</span>
       </div>
     );
   }
@@ -46,6 +46,9 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = state => ({ userQuery: state.userQuery });
+const mapStateToProps = state => ({
+  userQuery: state.userQuery,
+  message: state.message,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

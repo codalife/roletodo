@@ -23,6 +23,13 @@ const hardCoded = {
 
 app.use(express.static('dist'));
 
+app.get('/users', (req, res) =>
+  db.user
+    .findAll()
+    .then(users => res.send(users))
+    .catch(err => console.log(err)),
+);
+
 app.get('/user/:name', (req, res) => res.send(hardCoded[req.params.name]));
 
 app.listen(3000, () => console.log('app listening on port 3000'));

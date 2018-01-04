@@ -5,6 +5,7 @@ import store from '../redux/store';
 import Navigation from './Navigation';
 import Home from './Home';
 import Edit from './Edit';
+import Create from './Create';
 
 const App = () => (
   <BrowserRouter>
@@ -14,8 +15,8 @@ const App = () => (
         <div>
           <div className="container">
             <Route exact path="/" component={Home} />
-            <Route path="/protected/edit" component={Edit} />
-            <Route path="/protected/create" component={Edit} />
+            <Route path="/edit" component={Edit} />
+            <Route path="/create" component={Create} />
           </div>
         </div>
       </div>

@@ -7,7 +7,10 @@ const Navigation = props => (
   <Navbar inverse collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">To Do</a>
+        <a>To Do</a>
+        <span>
+          {props.role !== null ? `   ${props.role} ${props.name}` : ''}
+        </span>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -25,6 +28,7 @@ const Navigation = props => (
 
 const mapStateToProps = state => ({
   role: state.role,
+  name: state.userQuery,
 });
 
 const mapDispatchToProps = dispatch => ({

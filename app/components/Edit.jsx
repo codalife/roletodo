@@ -1,11 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Edit = () => (
-  <div>
-    <h2>Edit</h2>
-    <Link to="/protected">login</Link>
-  </div>
-);
+const Edit = props =>
+  props.role ? (
+    <div>
+      <Link to="/">back to ToDos</Link>
+      <h2>Edit</h2>
+    </div>
+  ) : (
+    <Redirect to="/" />
+  );
 
-export default Edit;
+const mapStateToProps = state => ({ role: state.role });
+
+export default connect(mapStateToProps)(Edit);
