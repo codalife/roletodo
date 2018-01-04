@@ -3,10 +3,19 @@ import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Panel, Media, Checkbox, Button } from 'react-bootstrap';
 
+import TabSwitcher from './TabSwitcher';
+
 const ToDoList = props => (
   <div>
+    {props.role === 'employee' ? (
+      <TabSwitcher />
+    ) : (
+      <Panel>
+        <Button> Create to do </Button>
+      </Panel>
+    )}
     <div>
-      {props.tasks.map((task, index) => (
+      {props.todosToShow.map((task, index) => (
         <Panel header={task.name} key={index}>
           <Media key={index}>
             <Media.Left>
@@ -35,6 +44,9 @@ const ToDoList = props => (
   </div>
 );
 
-const mapStateToProps = state => ({ role: state.role, tasks: state.tasks });
+const mapStateToProps = state => ({
+  role: state.role,
+  todosToShow: state.todosToShow,
+});
 
 export default connect(mapStateToProps)(ToDoList);

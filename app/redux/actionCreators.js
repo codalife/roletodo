@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, SET_QUERY } from './actions';
+import { FETCH_USER, SET_QUERY, FILTER } from './actions';
 
 export const fetchUser = (dispatch, name) => {
   return axios({
@@ -15,3 +15,5 @@ export const setUserQuery = name => ({
   type: SET_QUERY,
   payload: name,
 });
+
+export const filter = num => ({ type: FILTER, payload: num });
