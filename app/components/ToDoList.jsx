@@ -19,12 +19,13 @@ const ToDoList = props => (
     )}
     <div>
       {props.todosToShow.map((task, index) => (
-        <Panel header={task.name} key={index}>
+        <Panel header={task.title} key={index}>
           <Media key={index}>
             <Media.Left>
               <Checkbox
                 onClick={() => props.changeStatus(task.id)}
                 disabled={props.role === 'manager'}
+                checked={task.completed}
               />
             </Media.Left>
             <Media.Body>
@@ -63,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps)(ToDoList);
+export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);

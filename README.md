@@ -4,6 +4,8 @@ The project has Front-End and Back-End
 
 To start the app:
 
+Consult README in db folder to spin up Postgres and connect to the server
+
 1. Install yarn if not installed alredy: npm install -g yarn
 2. Run yarn to install dependencies. In the app's root folder: yarn
 3. Start server: yarn start

@@ -1,9 +1,12 @@
+import axios from 'axios';
 import {
   FETCH_USER,
   SET_QUERY,
   FILTER,
   SIGNOUT,
   CHANGE_STATUS,
+  FIELD,
+  CREATE,
 } from '../redux/actions';
 
 const INIT_STATE = {
@@ -12,12 +15,14 @@ const INIT_STATE = {
   active: 1,
   todosToShow: [],
   tasks: [],
+  titleNew: '',
+  descriptionNew: '',
 };
 
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case FETCH_USER:
-      const role = action.payload.role;
+      const role = action.payload.user.role;
       const tasks = action.payload.tasks || [];
       let todosToShow = tasks.filter(task => task.completed === false);
       let message = null;
@@ -47,6 +52,25 @@ const reducer = (state = INIT_STATE, action) => {
       newTasks[action.payload].completed = !newTasks[action.payload].completed;
       todosToShow = state.tasks.filter(task => task.completed === true);
       return { ...state };
+    case FIELD:
+      if (action.payload.field === 'title') {
+        return { ...state, titleNew: action.payload.value };
+      } else {
+        return { ...state, descriptionNew: action.payload.value };
+      }
+    case CREATE:
+      axios
+        .post('/createtodo', {
+          title: state.titleNew,
+          description: state.descriptionNew,
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      return state;
     default:
       return state;
   }

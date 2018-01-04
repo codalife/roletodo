@@ -5,6 +5,8 @@ import {
   FILTER,
   SIGNOUT,
   CHANGE_STATUS,
+  FIELD,
+  CREATE,
 } from './actions';
 
 export const fetchUser = (dispatch, name) => {
@@ -29,4 +31,13 @@ export const signout = () => ({ type: SIGNOUT });
 export const changeStatusAction = taskId => ({
   type: CHANGE_STATUS,
   payload: taskId,
+});
+
+export const fieldUpdater = (value, field) => ({
+  type: FIELD,
+  payload: { value, field },
+});
+
+export const createTodo = () => ({
+  type: CREATE,
 });

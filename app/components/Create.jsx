@@ -9,20 +9,29 @@ import {
   FormGroup,
   Button,
 } from 'react-bootstrap';
+import { fieldUpdater, createTodo } from '../redux/actionCreators';
 
 const Create = props =>
   props.role ? (
     <div>
       <Link to="/">back to ToDos</Link>
       <h2>Create</h2>
-      <form>
+      <form onSubmit={props.handleSubmit}>
         <FormGroup controlId="formInlineName">
-          <ControlLabel>Name</ControlLabel>
-          <FormControl type="text" placeholder="Todo" />
+          <ControlLabel>Title</ControlLabel>
+          <FormControl
+            onChange={e => props.updateField(e.target.value, 'title')}
+            type="text"
+            placeholder="Name me"
+          />
         </FormGroup>
         <FormGroup controlId="formInlineName">
           <ControlLabel>Description</ControlLabel>
-          <FormControl type="text" placeholder="Always code " />
+          <FormControl
+            onChange={e => props.updateField(e.target.value, 'description')}
+            type="text"
+            placeholder="What needs to be done "
+          />
         </FormGroup>
 
         <Button type="submit">Submit</Button>
@@ -34,4 +43,14 @@ const Create = props =>
 
 const mapStateToProps = state => ({ role: state.role });
 
-export default connect(mapStateToProps)(Create);
+const mapDispatchToProps = dispatch => ({
+  updateField(value, field) {
+    dispatch(fieldUpdater(value, field));
+  },
+  handleSubmit(e, value, field) {
+    e.preventDefault();
+    dispatch(createTodo());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

@@ -3,3 +3,5 @@ export const SET_QUERY = 'SET_QUERY';
 export const FILTER = 'FILTER';
 export const SIGNOUT = 'SIGNOUT';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
+export const FIELD = 'FIELD';
+export const CREATE = 'CREATE';

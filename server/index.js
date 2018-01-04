@@ -1,9 +1,15 @@
 const express = require('express');
 const db = require('./db');
 const app = express();
-const Sequelize = require('sequelize');
+const bodyParser = require('body-parser');
 
 app.use(express.static('dist'));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.get('/users', (req, res) =>
   db.user
@@ -40,5 +46,17 @@ app.get('/user/:name', (req, res) =>
       }
     }),
 );
+
+app.post('/createtodo', (req, res) => {
+  console.log(req.body);
+  db.task
+    .create({
+      title: req.body.title,
+      description: req.body.description,
+      userId: 1,
+      completed: false,
+    })
+    .then(response => res.send('success'));
+});
 
 app.listen(3000, () => console.log('app listening on port 3000'));
