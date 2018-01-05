@@ -12,6 +12,8 @@ To start the app:
 1. Start server: yarn start
 1. Go to http://localhost:3000 to see the app
 
+There are 2 users in the DB: Rane with a role of a manager and Anuar - employee. Use those names to login. The rest is as descibed in the prompt.
+
 Stack:
 
 1. React
