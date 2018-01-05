@@ -2,9 +2,9 @@ const express = require('express');
 const db = require('./db');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 
-app.use('/static', express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
