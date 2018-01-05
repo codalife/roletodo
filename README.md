@@ -1,15 +1,16 @@
-The project is a ToDo App with 2 roles: manager and employee
+# ToDo App with 2 roles: manager and employee
 
 The project has Front-End and Back-End
 
 To start the app:
 
-Consult README in db folder to spin up Postgres and connect to the server
+**Consult README in db folder to spin up Postgres and connect to the server**
 
+0. git clone https://github.com/codalife/roletodo.git
 1. Install yarn if not installed alredy: npm install -g yarn
-2. Run yarn to install dependencies. In the app's root folder: yarn
-3. Start server: yarn start
-4. Go to http://localhost:3000
+1. Run yarn to install dependencies. In the app's root folder: yarn
+1. Start server: yarn start
+1. Go to http://localhost:3000 to see the app
 
 Stack:
 
@@ -18,13 +19,18 @@ Stack:
 3. Yarn + NPM
 4. Webpack
 5. Babel
-6. Sqlite3
+6. Node/Express
+7. Postgres
+8. Sequelize
+9. Axios
+10. React-Bootstrap
+11. Heroku
 
 Justification for choosing technologies:
 Yarn - making sure application is not dependant on local machine’s environment.
 React - scalability, eaze of development and maintainance
 Redux - not really justifiable for an app this size, simplifies state management
-sqlite - lightweight in-memory data storage that mimics relational db
+Postgres - relational db for relational data
 
 Additional tooling:
 
