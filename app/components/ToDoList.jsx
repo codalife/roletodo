@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Panel, Media, Checkbox, Button } from 'react-bootstrap';
+import { Panel, Media, Checkbox, Button, ButtonGroup } from 'react-bootstrap';
 import { changeStatus } from '../redux/actionCreators';
 
 import TabSwitcher from './TabSwitcher';
@@ -34,11 +34,13 @@ const ToDoList = props => (
               <p>{task.description}</p>
             </Media.Body>
             {props.role === 'manager' ? (
-              <Media.Right>
-                <Link to={`/edit/${index}`}>
-                  <Button>Edit</Button>
-                </Link>
-              </Media.Right>
+              <ButtonGroup>
+                <Button>
+                  <Link to={`/edit/${index}`}>Edit</Link>
+                </Button>
+
+                <Button>Delete</Button>
+              </ButtonGroup>
             ) : (
               <Media.Right />
             )}
