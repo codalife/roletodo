@@ -1,5 +1,5 @@
 const express = require('express');
-// const db = require('./db');
+const db = require('./db');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-/*
+
 app.get('/users', (req, res) =>
   db.user
     .findAll({
@@ -67,5 +67,5 @@ app.patch('/changestatus', (req, res) => {
   console.log(`${id}, ${status}`);
   res.send(`${id}, ${status}`);
 });
-*/
+
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
