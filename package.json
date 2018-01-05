@@ -5,9 +5,10 @@
   "author": "Anuar Zhuken",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"**/*.{js,jsx}\"",
+    "format":
+      "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"**/*.{js,jsx}\"",
     "lint": "eslint --ext .js --ext .jsx app",
-    "start": "nodemon ./server/index.js"
+    "start": "node ./server/index.js"
   },
   "dependencies": {
     "axios": "^0.17.1",
