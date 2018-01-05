@@ -4,6 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const PORT = process.env.PORT || 3000;
+
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // parse application/x-www-form-urlencoded
@@ -66,4 +68,4 @@ app.patch('/changestatus', (req, res) => {
   res.send(`${id}, ${status}`);
 });
 */
-app.listen(3000, () => console.log('app listening on port 3000'));
+app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
