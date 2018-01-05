@@ -7,6 +7,7 @@ import {
   CHANGE_STATUS,
   FIELD,
   CREATE,
+  DELETE,
 } from '../redux/actions';
 
 const INIT_STATE = {
@@ -22,7 +23,7 @@ const INIT_STATE = {
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case FETCH_USER:
-      const role = action.payload.user.role;
+      const role = action.payload.user && action.payload.user.role;
       const tasks = action.payload.tasks || [];
       let todosToShow = tasks.filter(task => task.completed === false);
       let message = null;
@@ -77,6 +78,16 @@ const reducer = (state = INIT_STATE, action) => {
         todosToShow: newTasks,
         message: `Created new todo ${action.payload.title}`,
       };
+    case DELETE:
+      let tasksForDelete = state.tasks.slice();
+      for (let i = 0; i < tasksForDelete.length; i += 1) {
+        if (tasksForDelete[i].id === action.payload) {
+          tasksForDelete.splice(i, 1);
+          break;
+        }
+      }
+
+      return { ...state, tasks: tasksForDelete, todosToShow: tasksForDelete };
     default:
       return state;
   }

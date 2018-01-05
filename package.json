@@ -8,7 +8,7 @@
     "format":
       "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"**/*.{js,jsx}\"",
     "lint": "eslint --ext .js --ext .jsx app",
-    "start": "node ./server/index.js"
+    "start": "nodemon ./server/index.js"
   },
   "dependencies": {
     "axios": "^0.17.1",

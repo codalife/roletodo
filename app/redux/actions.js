@@ -5,3 +5,4 @@ export const SIGNOUT = 'SIGNOUT';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const FIELD = 'FIELD';
 export const CREATE = 'CREATE';
+export const DELETE = 'DELETE';

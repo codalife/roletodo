@@ -68,4 +68,16 @@ app.patch('/changestatus', (req, res) => {
   res.send(`${id}, ${status}`);
 });
 
+app.delete('/removetodo/:id', (req, res) => {
+  console.log(`trying to destroy ${req.params}`);
+
+  db.task
+    .destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    .then(response => res.send('successfully deleted'));
+});
+
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));

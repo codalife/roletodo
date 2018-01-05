@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Panel, Media, Checkbox, Button, ButtonGroup } from 'react-bootstrap';
-import { changeStatus } from '../redux/actionCreators';
+import { changeStatus, deleteTodo } from '../redux/actionCreators';
 
 import TabSwitcher from './TabSwitcher';
 
@@ -39,7 +39,9 @@ const ToDoList = props => (
                   <Link to={`/edit/${index}`}>Edit</Link>
                 </Button>
 
-                <Button>Delete</Button>
+                <Button onClick={() => props.deleteTask(task.id)}>
+                  Delete
+                </Button>
               </ButtonGroup>
             ) : (
               <Media.Right />
@@ -59,6 +61,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   changeTaskStatus(taskId, status) {
     changeStatus(taskId, status, dispatch);
+  },
+  deleteTask(taskId) {
+    deleteTodo(taskId, dispatch);
   },
 });
 

@@ -7,6 +7,7 @@ import {
   CHANGE_STATUS,
   FIELD,
   CREATE,
+  DELETE,
 } from './actions';
 
 export const fetchUser = (dispatch, name) => {
@@ -34,10 +35,12 @@ export const changeStatus = (taskId, status, dispatch) => {
     .then(response => dispatch({ type: CHANGE_STATUS, payload: taskId }));
 };
 
-// ({
-//   type: CHANGE_STATUS,
-//   payload: taskId,
-// });
+export const deleteTodo = (id, dispatch) => {
+  console.log(`in action creator ${id}`);
+  axios
+    .delete(`/removetodo/${id}`)
+    .then(response => dispatch({ type: DELETE, payload: id }));
+};
 
 export const fieldUpdater = (value, field) => ({
   type: FIELD,
