@@ -59,4 +59,10 @@ app.post('/createtodo', (req, res) => {
     .then(response => res.send(response));
 });
 
+app.patch('/changestatus', (req, res) => {
+  const { id, status } = req.body;
+  console.log(`${id}, ${status}`);
+  res.send(`${id}, ${status}`);
+});
+
 app.listen(3000, () => console.log('app listening on port 3000'));

@@ -28,10 +28,16 @@ export const filter = num => ({ type: FILTER, payload: num });
 
 export const signout = () => ({ type: SIGNOUT });
 
-export const changeStatusAction = taskId => ({
-  type: CHANGE_STATUS,
-  payload: taskId,
-});
+export const changeStatus = (taskId, status, dispatch) => {
+  axios
+    .patch('/changestatus', { id: taskId, status })
+    .then(response => dispatch({ type: CHANGE_STATUS, payload: taskId }));
+};
+
+// ({
+//   type: CHANGE_STATUS,
+//   payload: taskId,
+// });
 
 export const fieldUpdater = (value, field) => ({
   type: FIELD,

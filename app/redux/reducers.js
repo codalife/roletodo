@@ -49,9 +49,19 @@ const reducer = (state = INIT_STATE, action) => {
       return { ...INIT_STATE };
     case CHANGE_STATUS:
       let newTasks = state.tasks.slice();
-      newTasks[action.payload].completed = !newTasks[action.payload].completed;
-      todosToShow = state.tasks.filter(task => task.completed === true);
-      return { ...state };
+      newTasks.forEach(task => {
+        if (task.id === action.payload) {
+          task.completed = !task.completed;
+        }
+      });
+      if (state.active === 3) {
+        return { ...state, tasks: newTasks, todosToShow: newTasks };
+      } else {
+        todosToShow = newTasks.filter(
+          task => task.completed === (state.active === 2),
+        );
+        return { ...state, tasks: newTasks, todosToShow };
+      }
     case FIELD:
       if (action.payload.field === 'title') {
         return { ...state, titleNew: action.payload.value };

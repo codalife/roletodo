@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Panel, Media, Checkbox, Button } from 'react-bootstrap';
-import { changeStatusAction } from '../redux/actionCreators';
+import { changeStatus } from '../redux/actionCreators';
 
 import TabSwitcher from './TabSwitcher';
 
@@ -19,11 +19,13 @@ const ToDoList = props => (
     )}
     <div>
       {props.todosToShow.map((task, index) => (
-        <Panel header={task.title} key={index}>
+        <Panel header={task.title} key={task.id}>
           <Media key={index}>
             <Media.Left>
               <Checkbox
-                onClick={() => props.changeStatus(task.id)}
+                onChange={() =>
+                  props.changeTaskStatus(task.id, !task.completed)
+                }
                 disabled={props.role === 'manager'}
                 checked={task.completed}
               />
@@ -53,8 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeStatus(taskId) {
-    dispatch();
+  changeTaskStatus(taskId, status) {
+    changeStatus(taskId, status, dispatch);
   },
 });
 
