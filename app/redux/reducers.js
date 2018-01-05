@@ -8,6 +8,7 @@ import {
   FIELD,
   CREATE,
   DELETE,
+  EDIT,
 } from '../redux/actions';
 
 const INIT_STATE = {
@@ -29,6 +30,8 @@ const reducer = (state = INIT_STATE, action) => {
       let message = null;
       if (!role) {
         message = `user ${state.userQuery} not found`;
+      } else {
+        message = '';
       }
       return { ...state, role, tasks, todosToShow, message };
     case SET_QUERY:
@@ -86,8 +89,21 @@ const reducer = (state = INIT_STATE, action) => {
           break;
         }
       }
-
       return { ...state, tasks: tasksForDelete, todosToShow: tasksForDelete };
+    case EDIT:
+      newTasks = state.tasks.slice();
+      newTasks.forEach(task => {
+        if (task.id === action.payload) {
+          task.description = state.descriptionNew;
+          task.title = state.titleNew;
+        }
+      });
+      return {
+        ...state,
+        tasks: newTasks,
+        todosToShow: newTasks,
+        message: `Updated task ${title}`,
+      };
     default:
       return state;
   }

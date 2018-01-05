@@ -80,4 +80,19 @@ app.delete('/removetodo/:id', (req, res) => {
     .then(response => res.send('successfully deleted'));
 });
 
+app.put('/edittodo', (req, res) => {
+  const { id, title, description } = req.body;
+  db.task
+    .findOne({
+      where: { id: id },
+    })
+    .then(todo => {
+      if (todo) {
+        todo
+          .updateAttributes({ title, description })
+          .then(() => res.send('success'));
+      }
+    });
+});
+
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));

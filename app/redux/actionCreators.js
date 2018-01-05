@@ -8,6 +8,7 @@ import {
   FIELD,
   CREATE,
   DELETE,
+  EDIT,
 } from './actions';
 
 export const fetchUser = (dispatch, name) => {
@@ -36,7 +37,6 @@ export const changeStatus = (taskId, status, dispatch) => {
 };
 
 export const deleteTodo = (id, dispatch) => {
-  console.log(`in action creator ${id}`);
   axios
     .delete(`/removetodo/${id}`)
     .then(response => dispatch({ type: DELETE, payload: id }));
@@ -55,6 +55,17 @@ export const createTodo = (title, description, dispatch) => {
     })
     .then(response => {
       dispatch({ type: CREATE, payload: response.data });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const editTodo = (id, title, description, dispatch) => {
+  axios
+    .put('/edittodo', { id, title, description })
+    .then(response => {
+      dispatch({ type: EDIT, payload: id });
     })
     .catch(error => {
       console.log(error);
