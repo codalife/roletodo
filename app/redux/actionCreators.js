@@ -38,6 +38,16 @@ export const fieldUpdater = (value, field) => ({
   payload: { value, field },
 });
 
-export const createTodo = () => ({
-  type: CREATE,
-});
+export const createTodo = (title, description, dispatch) => {
+  axios
+    .post('/createtodo', {
+      title,
+      description,
+    })
+    .then(response => {
+      dispatch({ type: CREATE, payload: response.data });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};

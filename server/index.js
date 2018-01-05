@@ -56,7 +56,7 @@ app.post('/createtodo', (req, res) => {
       userId: 1,
       completed: false,
     })
-    .then(response => res.send('success'));
+    .then(response => res.send(response));
 });
 
 app.listen(3000, () => console.log('app listening on port 3000'));

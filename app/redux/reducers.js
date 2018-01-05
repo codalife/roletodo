@@ -59,18 +59,14 @@ const reducer = (state = INIT_STATE, action) => {
         return { ...state, descriptionNew: action.payload.value };
       }
     case CREATE:
-      axios
-        .post('/createtodo', {
-          title: state.titleNew,
-          description: state.descriptionNew,
-        })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      return state;
+      newTasks = state.tasks.slice();
+      newTasks.push(action.payload);
+      return {
+        ...state,
+        tasks: newTasks,
+        todosToShow: newTasks,
+        message: `Created new todo ${action.payload.title}`,
+      };
     default:
       return state;
   }

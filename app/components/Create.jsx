@@ -16,7 +16,7 @@ const Create = props =>
     <div>
       <Link to="/">back to ToDos</Link>
       <h2>Create</h2>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={e => props.handleSubmit(e, props)}>
         <FormGroup controlId="formInlineName">
           <ControlLabel>Title</ControlLabel>
           <FormControl
@@ -36,20 +36,26 @@ const Create = props =>
 
         <Button type="submit">Submit</Button>
       </form>
+      {props.message}
     </div>
   ) : (
     <Redirect to="/" />
   );
 
-const mapStateToProps = state => ({ role: state.role });
+const mapStateToProps = state => ({
+  role: state.role,
+  message: state.message,
+  titleNew: state.titleNew,
+  descriptionNew: state.descriptionNew,
+});
 
 const mapDispatchToProps = dispatch => ({
   updateField(value, field) {
     dispatch(fieldUpdater(value, field));
   },
-  handleSubmit(e, value, field) {
+  handleSubmit(e, props) {
     e.preventDefault();
-    dispatch(createTodo());
+    createTodo(props.titleNew, props.descriptionNew, dispatch);
   },
 });
 
