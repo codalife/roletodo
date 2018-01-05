@@ -102,7 +102,7 @@ const reducer = (state = INIT_STATE, action) => {
         ...state,
         tasks: newTasks,
         todosToShow: newTasks,
-        message: `Updated task ${title}`,
+        message: `Updated task with title: ${state.titleNew}`,
       };
     default:
       return state;

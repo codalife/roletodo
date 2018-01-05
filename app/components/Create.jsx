@@ -36,7 +36,7 @@ const Create = props =>
 
         <Button type="submit">Submit</Button>
       </form>
-      {props.message}
+      {this.props.message.includes('Created') ? this.props.message : ''}
     </div>
   ) : (
     <Redirect to="/" />

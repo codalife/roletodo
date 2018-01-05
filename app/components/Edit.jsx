@@ -57,7 +57,7 @@ class Edit extends React.Component {
 
           <Button type="submit">Submit</Button>
         </form>
-        {this.props.message}
+        {this.props.message.includes('Updated') ? this.props.message : ''}
       </div>
     ) : (
       <Redirect to="/" />
